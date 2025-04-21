@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+  <script>
+    // const stack = [];
+    // stack.push(10);
+    // stack.push(20);
+    // //stack.pop(20);
+    // const item = stack.pop();
+    // console.log(item);
+    // const empty = stack.pop();
+    // console.log(empty);
+
+    class Stack {
+      constructor() {
+        this.items = []; // 비어 있는 배열로 시작!
+        console.log("this : ", this);
+      }
+
+      push(element) {
+        this.items.push(element);
+        // 여기에 "값을 추가하는 코드"를 짤 거야
+        //스택은 맨 앞에 추가
+      }
+
+      pop(element) {
+        this.items.pop(element);
+        //스택은 맨 뒤에 제거
+      }
+    }
+
+    const stack = new Stack();
+
+    stack.push(10);
+    stack.push(20);
+    stack.push(30);
+
+    console.log(stack.items);
+
+    stack.pop();
+
+    console.log(stack.items);
+
+    class Queue {
+      // 큐는 맨 앞에 들어온 게 가장 먼저 나감.
+      constructor() {
+        this.items = []; // 비어 있는 배열로 시작!
+        console.log("this : ", this);
+      }
+
+      enqueue(element) {
+        this.items.unshift(element); // 줄 맨 뒤에 추가
+      }
+
+      dequeue() {
+        return this.items.shift(); // 줄 맨 앞에서 제거
+      }
+    }
+
+    const queue = new Queue();
+
+    queue.enqueue(1);
+    queue.enqueue(2);
+    queue.enqueue(3);
+
+    queue.dequeue();
+
+    console.log(queue);
+  </script>
+</html>

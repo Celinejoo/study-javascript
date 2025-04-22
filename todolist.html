@@ -5,6 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 30px;
+    }
+
+    input[type="text"] {
+      padding: 8px;
+      width: 250px;
+      margin-right: 8px;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 8px 12px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-left: 4px;
+    }
+
+    ul#todo-list {
+      list-style: none;
+      padding: 0;
+      margin-top: 20px;
+    }
+
+    ul#todo-list li {
+      display: flex;
+      align-items: center;
+      padding: 8px;
+    }
+    ul#todo-list li.completed span {
+      text-decoration: line-through;
+      color: #aaa;
+    }
+  </style>
   <body>
     <input type="text" id="todo" />
     <button id="add-btn">추가하기</button>
@@ -24,25 +60,60 @@
     function addTodo() {
       const inputValue = todoinput.value.trim();
       if (inputValue !== "") {
-        todoArray.push(inputValue);
+        todoArray.push({ text: inputValue, done: false });
         todoinput.value = "";
         renderTodos();
         saveTodos();
       }
     }
+
     function renderTodos() {
       todoList.innerHTML = "";
 
       todoArray.forEach((todo, index) => {
         const li = document.createElement("li");
+
         const deleteBtn = document.createElement("button");
         deleteBtn.textContent = "삭제";
-        li.textContent = todo; // 텍스트 넣고
-        li.appendChild(deleteBtn);
+
+        const editBtn = document.createElement("button");
+        editBtn.textContent = "수정";
+
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.checked = todo.done;
+
+        if (todo.done) {
+          li.classList.add("completed");
+        }
+
+        const span = document.createElement("span");
+        span.textContent = todo.text;
+
         todoList.appendChild(li);
+        li.appendChild(checkbox);
+        li.appendChild(span);
+        span.textContent = todo.text; // 텍스트 넣고
+        li.appendChild(deleteBtn);
+        li.appendChild(editBtn);
+
+        checkbox.addEventListener("change", () => {
+          todo.done = checkbox.checked;
+          renderTodos(); // 다시 그려주기 (상태 반영)
+        });
 
         deleteBtn.addEventListener("click", () => {
-          deleteTodo(index);
+          if (confirm("삭제하시겠습니까?")) {
+            deleteTodo(index);
+          }
+        });
+        editBtn.addEventListener("click", () => {
+          const newText = prompt("새 할 일을 입력하세요", todo.text);
+          if (newText.trim() !== "" && newText !== null) {
+            todo.text = newText.trim();
+            renderTodos();
+            saveTodos();
+          }
         });
       });
     }
@@ -55,10 +126,6 @@
 
     function saveTodos() {
       localStorage.setItem("todos", JSON.stringify(todoArray));
-      // getItem으로 문자열을 가져오고
-      // JSON.parse()로 다시 배열로 변환해!
-      // todoArray에 펼쳐서(push ...) 넣어주고
-      // renderTodos()로 화면 다시 그려주기
     }
 
     function loadTodos() {
@@ -67,6 +134,11 @@
         todoArray.push(...JSON.parse(savedTodos));
         renderTodos();
       }
+
+      // getItem으로 문자열을 가져오고
+      // JSON.parse()로 다시 배열로 변환해!
+      // todoArray에 펼쳐서(push ...) 넣어주고
+      // renderTodos()로 화면 다시 그려주기
     }
 
     btn.addEventListener("click", addTodo);

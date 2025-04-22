@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>고차함수와 클로저</title>
+  </head>
+  <body></body>
+  <script>
+    function createCounter() {
+      let count = 0;
+
+      return function plusCount() {
+        count++;
+        console.log(count);
+        return count;
+      };
+    }
+    const counter = createCounter();
+    counter();
+    counter();
+    counter();
+
+    const array = [1, 2, 3, 4, 5];
+
+    const plus = array.map((number) => {
+      return number + 10;
+    });
+    console.log(plus);
+
+    const farray = [10, 15, 20, 25, 30];
+
+    const filter = farray.filter((number) => number >= 20);
+
+    console.log(filter);
+
+    const arr = [1, 2, 3, 4, 5];
+    const reduce = arr.reduce((acc, curr) => {
+      return acc + curr;
+    }, 0);
+
+    const names = ["현정", "민수", "지아", "수빈", "지훈"];
+    const namereduce = names.reduce((acc, curr) => {
+      return acc + curr.length;
+    }, 0);
+
+    console.log(namereduce);
+
+    const students = [
+      { name: "현정", gender: "female" },
+      { name: "민수", gender: "male" },
+      { name: "지아", gender: "female" },
+      { name: "지훈", gender: "male" },
+      { name: "수빈", gender: "female" },
+    ];
+
+    const genderarr = students.reduce(
+      (acc, curr) => {
+        acc[curr.gender]++;
+        return acc;
+      },
+      { female: 0, male: 0 }
+    );
+
+    console.log(genderarr);
+
+    const cart = [
+      { name: "노트북", price: 1000000, quantity: 1 },
+      { name: "마우스", price: 20000, quantity: 2 },
+      { name: "키보드", price: 50000, quantity: 1 },
+      { name: "모니터", price: 300000, quantity: 1 },
+    ];
+
+    const plus1 = cart.reduce((acc, curr) => {
+      return acc + curr.price * curr.quantity;
+    }, 0);
+
+    console.log(plus1);
+
+    const scores = [
+      { subject: "수학", score: 90 },
+      { subject: "영어", score: 85 },
+      { subject: "수학", score: 95 },
+      { subject: "영어", score: 92 },
+      { subject: "과학", score: 88 },
+    ];
+
+    const highScroe = scores.reduce((acc, curr) => {
+      if (!acc[curr.subject]) {
+        acc[curr.subject] = curr.score;
+      } else {
+        acc[curr.subject] = Math.max(acc[curr.subject], curr.score);
+      }
+
+      return acc;
+    }, {});
+    console.log(highScroe);
+
+    const users = [
+      { name: "현정", age: 24 },
+      { name: "민수", age: 31 },
+      { name: "지아", age: 29 },
+      { name: "지훈", age: 35 },
+      { name: "수빈", age: 22 },
+      { name: "도윤", age: 41 },
+    ];
+
+    const age = users.reduce((acc, curr) => {
+      if (curr.age >= 20 && curr.age < 30) {
+        key = "20";
+      } else if (curr.age >= 30 && curr.age < 40) {
+        key = "30";
+      } else {
+        key = "40";
+      }
+
+      if (!acc[key]) {
+        acc[key] = 1;
+      } else {
+        acc[key]++;
+      }
+
+      return acc;
+    }, {});
+    console.log(age);
+
+    const sales = [
+      { type: "전자제품", price: 1000000, quantity: 2 },
+      { type: "식품", price: 2000, quantity: 30 },
+      { type: "전자제품", price: 500000, quantity: 1 },
+      { type: "식품", price: 1500, quantity: 20 },
+      { type: "의류", price: 50000, quantity: 5 },
+    ];
+
+    const total = sales.reduce((acc, curr) => {
+      if (!acc[curr.type]) {
+        acc[curr.type] = curr.price * curr.quantity;
+      } else {
+        acc[curr.type] = acc[curr.type] + curr.price * curr.quantity;
+      }
+
+      return acc;
+    }, {});
+
+    console.log(total);
+  </script>
+</html>

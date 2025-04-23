@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+  <script>
+    const orderFood = new Promise((resolve, reject) => {
+      const sucess = Math.random() < 0.5;
+
+      setTimeout(() => {
+        if (sucess) {
+          resolve("성공");
+        } else {
+          reject("실패");
+        }
+      }, 2000);
+    });
+
+    async function food() {
+      try {
+        const result = await orderFood;
+        console.log(result);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    food();
+
+    // orderFood
+    //   .then((result) => console.log(result))
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
+
+    // async function setMenu() {
+    //   try {
+    //     const result1 = await pizza;
+    //     const result2 = await coke;
+    //     console.log(result1, result2);
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // }
+
+    //setMenu();
+
+    // Promise.all([pizza, coke, potato])
+    //   .then((results) => {
+    //     console.log(results);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
+
+    // async function fetchData() {
+    //   try {
+    //     const result = await getData();
+    //     console.log(result);
+    //   } catch (error) {
+    //     console.error(error);
+    //   }
+    // }
+
+    // const pizza = new Promise((resolve, reject) => {
+    //   setTimeout(() => {
+    //     resolve("피자 준비 완료");
+    //   }, 1000);
+    // });
+
+    const pizza = new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve("피자 준비 완료");
+      }, 1000);
+    });
+
+    const coke = new Promise((resolve) =>
+      setTimeout(() => resolve("콜라 준비 완료"), 2000)
+    );
+
+    const potato = new Promise((resolve) =>
+      setTimeout(() => resolve("감자튀김 준비 완료"), 1500)
+    );
+
+    // async function setMenu() {
+    //   try {
+    //     const result = await Promise.all([pizza, coke, potato]);
+    //     console.log(result);
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // }
+
+    async function setMenu() {
+      try {
+        const menu = [pizza, coke, potato];
+        for (const makeMenu of menu) {
+          const result = await makeMenu;
+          console.log(result);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    setMenu();
+  </script>
+</html>

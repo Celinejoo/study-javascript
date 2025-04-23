@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>스코프와 클로저</title>
+  </head>
+  <body></body>
+  <script>
+    console.log(name); // 접근 안됨
+    let name = "현정";
+
+    console.log("1:", x); //undefinded
+    var x = 10;
+
+    function outer() {
+      console.log("2:", x); //undefinded
+      var x = 20;
+
+      function inner() {
+        console.log("3:", x); //20
+      }
+
+      inner();
+    }
+
+    outer();
+    console.log("4:", x); //10
+  </script>
+</html>

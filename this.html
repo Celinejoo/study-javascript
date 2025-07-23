@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+  <script>
+    var obj1 = {
+      outer: function () {
+        console.log(this); //obj1
+        var innerFunc = function () {
+          console.log(this); // outer 가 아니라 window...?
+        };
+        innerFunc(); // 함수로서 호출 되었기 때문에 this가 지정되지 않았고,
+
+        var obj2 = {
+          innerMethod: innerFunc,
+        };
+
+        obj2.innerMethod(); //obj2
+      },
+    };
+
+    obj1.outer();
+
+    var func = function (a, b, c) {
+      console.log(this, a, b, c);
+    };
+    func(1, 2, 3);
+    func.call({ x: 1 }, 1, 2, 3);
+
+    var obj = {
+      a: 1,
+      method: function (x, y) {
+        console.log(this.a, x, y);
+      },
+    };
+
+    obj.method(2, 3); // 1,2,3
+    obj.method.call({ a: 4 }, 5, 6);
+    // 4, 5, 6
+
+    var func = function (a, b, c) {
+      console.log(this, a, b, c);
+    };
+
+    func.apply({ x: 1 }, [4, 5, 6]);
+
+    var obj = {
+      a: 1,
+      method: function (x, y) {
+        console.log(this.a, x, y);
+      },
+    };
+
+    obj.method.apply({ a: 4 }, [5, 6]);
+
+    // var count = 0; // count 변수 선언, 0 할당
+    // var timer = setInterval(function () {
+    //   // timer 변수 선언,  setInterval 실행한 결과 할당
+    //   // setInterval 첫번째 인자는 익명함수, 300
+    //   console.log(count);
+    //   if (count > 4) clearInterval(timer);
+    // }, 300);
+
+    const colors = {
+      blackAlpha: {
+        100: "#000",
+        300: "#333",
+      },
+      white: "#fff",
+    };
+
+    console.log(colorPrefix.join("\n"));
+  </script>
+</html>

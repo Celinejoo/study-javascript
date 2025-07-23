@@ -86,6 +86,8 @@
     ];
 
     const highScroe = scores.reduce((acc, curr) => {
+      console.log(curr);
+      console.log("acc", acc);
       if (!acc[curr.subject]) {
         acc[curr.subject] = curr.score;
       } else {
@@ -137,6 +139,7 @@
         acc[curr.type] = curr.price * curr.quantity;
       } else {
         acc[curr.type] = acc[curr.type] + curr.price * curr.quantity;
+        console.log(acc[curr.type]);
       }
 
       return acc;

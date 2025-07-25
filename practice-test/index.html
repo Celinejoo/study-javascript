@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./main.css" />
+  </head>
+  <body>
+    <h1>내 주식 리스트!!!!</h1>
+
+    <div id="add-section">
+      <h2>주식 추가해보기</h2>
+      <label for="name">주식이름</label>
+      <input type="text" id="name" />
+      <label for="price">가격</label>
+      <input type="number" id="add-price" />
+      <label for="changeRate">등락률</label>
+      <input type="text" id="changeRate" />
+      <button id="add-btn">추가하기</button>
+    </div>
+
+    <table>
+      <thead>
+        <th>좋아요</th>
+        <th>종목</th>
+        <th>현재가</th>
+        <th>등락률</th>
+      </thead>
+      <tbody id="stack-list"></tbody>
+    </table>
+    <h2>좋아요 리스트</h2>
+    <ul id="like-name-list"></ul>
+    <table>
+      <thead>
+        <th>좋아요</th>
+        <th>종목</th>
+        <th>현재가</th>
+        <th>등락률</th>
+      </thead>
+      <tbody id="like-list"></tbody>
+    </table>
+    <h2>분석하기</h2>
+    <ul id="analysis-section">
+      <li id="one-like-li">좋아요를 하나 이상 했나요?</li>
+      <li id="all-like-li">모든 주식을 좋아요 했나요?</li>
+      <li id="ratio-li">좋아요 주식 비율</li>
+    </ul>
+  </body>
+  <script type="text/javascript" src="./stacklist.js"></script>
+</html>

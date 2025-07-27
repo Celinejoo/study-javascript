@@ -1,4 +1,4 @@
-const stackListArray = [
+export const stackListArray = [
   {
     liked: false,
     name: "삼성전자",
@@ -49,36 +49,36 @@ const stackListArray = [
   },
 ];
 
-const stackList = document.getElementById("stack-list");
-const likeList = document.getElementById("like-list");
-const nameInput = document.getElementById("name");
-const priceInput = document.getElementById("add-price");
-const changeRateInput = document.getElementById("changeRate");
 const addBtn = document.getElementById("add-btn");
 
-function addStack() {
-  const nameValue = nameInput.value.trim();
-  const priceValue = priceInput.value.trim();
-  const changeRateValue = changeRateInput.value.trim();
+export function addStack() {
+  const nameInput = document.getElementById("name");
+  const priceInput = document.getElementById("add-price");
+  const changeRateInput = document.getElementById("changeRate");
+
+  const nameValue = nameInput?.value.trim();
+  const priceValue = priceInput?.value.trim();
+  const changeRateValue = changeRateInput?.value.trim();
 
   if (nameValue !== "" && priceValue !== "" && changeRateValue !== "") {
     stackListArray.push({
       name: nameValue,
-      price: priceValue.toLocaleString(),
-      change_rate: changeRateValue,
+      price: Number(priceValue).toLocaleString(),
+      change_rate: Number(changeRateValue),
       liked: false,
     });
     nameInput.value = "";
     priceInput.value = "";
     changeRateInput.value = "";
     renderList();
+  } else {
+    alert("input 값 입력");
   }
 }
 
-addBtn.addEventListener("click", addStack);
-
 // 전체 주식 계좌 리스트
-function renderList() {
+export function renderList() {
+  const stackList = document.getElementById("stack-list");
   stackList.innerHTML = "";
   // 좋아요한 애들을 먼저 위로 보낸 후에 map
   stackListArray
@@ -92,9 +92,9 @@ function renderList() {
 }
 
 // 좋아요 계좌 리스트
-function renderLikeList() {
+export function renderLikeList() {
   const likeItem = stackListArray.filter((item) => item.liked);
-
+  const likeList = document.getElementById("like-list");
   likeList.innerHTML = "";
   likeItem.map((item) => {
     const tr = createRow(item);
@@ -113,7 +113,7 @@ function renderLikeList() {
 }
 
 // 모두 좋아요 했나요?
-function isAllLike() {
+export function isAllLike() {
   const isAllLikeValue = stackListArray.every((item) => item.liked);
 
   const allLikeli = document.getElementById("all-like-li");
@@ -129,7 +129,7 @@ function isAllLike() {
 }
 
 // 하나 이상 좋아요 했나요?
-function isOneLike() {
+export function isOneLike() {
   const isOneLikeValue = stackListArray.some((item) => item.liked);
   const oneLikeli = document.getElementById("one-like-li");
   let span = document.querySelector(".like-span");
@@ -143,7 +143,7 @@ function isOneLike() {
 }
 
 // 좋아요 비율
-function calculateRatio() {
+export function calculateRatio() {
   const likeCount = stackListArray.filter((item) => item.liked);
   const average = Math.ceil((likeCount.length / stackListArray.length) * 100);
 
@@ -160,7 +160,7 @@ function calculateRatio() {
 }
 
 // 중복되는 테이블 그리기
-function createRow(item) {
+export function createRow(item) {
   const tr = document.createElement("tr");
 
   //좋아요 버튼
@@ -185,7 +185,7 @@ function createRow(item) {
 
   const price = document.createElement("td");
   tr.appendChild(price);
-  price.textContent = item.price.toLocaleString();
+  price.textContent = item.price?.toLocaleString();
 
   const changeRate = document.createElement("td");
   tr.appendChild(changeRate);
@@ -214,9 +214,13 @@ function createRow(item) {
   });
   return tr;
 }
-
-renderList();
-renderLikeList();
-isAllLike();
-isOneLike();
-calculateRatio();
+window.onload = function () {
+  addBtn.addEventListener("click", addStack);
+  if (stackListArray.length !== 0) {
+    renderList();
+    renderLikeList();
+    isAllLike();
+    isOneLike();
+    calculateRatio();
+  }
+};

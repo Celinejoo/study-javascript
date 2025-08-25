@@ -3,31 +3,33 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>Document</title>
+    <script type="text/javascript" src="./react-query.js"></script>
   </head>
   <body></body>
   <script>
-    const orderFood = new Promise((resolve, reject) => {
-      const sucess = Math.random() < 0.5;
+    // const orderFood = new Promise((resolve, reject) => {
+    //   const sucess = Math.random() < 0.5;
 
-      setTimeout(() => {
-        if (sucess) {
-          resolve("성공");
-        } else {
-          reject("실패");
-        }
-      }, 2000);
-    });
+    //   setTimeout(() => {
+    //     if (sucess) {
+    //       resolve("성공");
+    //     } else {
+    //       reject("실패");
+    //     }
+    //   }, 2000);
+    // });
 
-    async function food() {
-      try {
-        const result = await orderFood;
-        console.log(result);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    food();
+    // async function food() {
+    //   try {
+    //     const result = await orderFood;
+    //     console.log(result);
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // }
+    // food();
 
     // orderFood
     //   .then((result) => console.log(result))
@@ -70,19 +72,19 @@
     //   }, 1000);
     // });
 
-    const pizza = new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve("피자 준비 완료");
-      }, 1000);
-    });
+    // const pizza = new Promise((resolve, reject) => {
+    //   setTimeout(() => {
+    //     resolve("피자 준비 완료");
+    //   }, 1000);
+    // });
 
-    const coke = new Promise((resolve) =>
-      setTimeout(() => resolve("콜라 준비 완료"), 2000)
-    );
+    // const coke = new Promise((resolve) =>
+    //   setTimeout(() => resolve("콜라 준비 완료"), 2000)
+    // );
 
-    const potato = new Promise((resolve) =>
-      setTimeout(() => resolve("감자튀김 준비 완료"), 1500)
-    );
+    // const potato = new Promise((resolve) =>
+    //   setTimeout(() => resolve("감자튀김 준비 완료"), 1500)
+    // );
 
     // async function setMenu() {
     //   try {
@@ -93,17 +95,17 @@
     //   }
     // }
 
-    async function setMenu() {
-      try {
-        const menu = [pizza, coke, potato];
-        for (const makeMenu of menu) {
-          const result = await makeMenu;
-          console.log(result);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    setMenu();
+    // async function setMenu() {
+    //   try {
+    //     const menu = [pizza, coke, potato];
+    //     for (const makeMenu of menu) {
+    //       const result = await makeMenu;
+    //       console.log(result);
+    //     }
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // }
+    // setMenu();
   </script>
 </html>

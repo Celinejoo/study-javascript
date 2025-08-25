@@ -6,8 +6,10 @@ import {
   renderLikeList,
   createRow,
   isOneLike,
-  calculateRatio,
-} from "./stacklist.js";
+  isAllLike,
+  getLikeRatio,
+  deleteStock,
+} from "./stocklist.js";
 
 beforeEach(() => {
   document.body.innerHTML = `
@@ -16,7 +18,7 @@ beforeEach(() => {
     <input type="text" id="changeRate" value="" />
     <ul id="stack-list"></ul>
     <ul id="like-list"></ul>
-    <button id="add-button"></button>
+     <button id="add-btn"></button>
     <tbody id="stack-list"></tbody>
     <ul id="like-name-list"></ul>
     <tbody id="like-list"></tbody>
@@ -56,8 +58,8 @@ test("input에 값을 입력 후 버튼을 클릭하면 주식리스트의 마�
   });
 });
 
-test("삭제 버튼을 클릭하면 주식리스트에서 삭제된다.", () => {
-  createRow(stackListArray);
+test("deleteStock 에 특정 주식의 아이디를 넘기면 주식 목록에서 삭제된다", () => {
+  deleteStock(stackListArray);
 });
 
 test("하얀하트를 클릭하면 파란하트로 변경되며 liked의 값이 true로 변경된다.", () => {
@@ -74,9 +76,12 @@ test("사용자가 좋아요를 하나 이상했다면 O가 출력되며 좋아�
 });
 
 test("사용자가 모두 좋아요를 했다면 O가 출력되고 아니라면 X가 출력된다.", () => {
-  isOneLike();
+  isAllLike();
 });
 
 test("전체 주식의 배열에서 좋아요한 주식의 비율을 계산한다.", () => {
-  calculateRatio();
+  getLikeRatio();
 });
+
+// 동작 점검
+// 데이터에 따른 시나리오
